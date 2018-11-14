@@ -1,0 +1,72 @@
+<!--
+  mohon perhatian untuk hal-hal berikut :
+  > penggunaan indentation diseragamkan yaitu :
+    > spaces size = 2 
+    > convert indentation to spaces
+  > untuk setiap validasi ruby diberi keterangan/comment
+  > untuk setiap element html diberi keterangan/comment
+  > format keterangan/comment ikuti yang sudah ada
+  > untuk setiap method yang mempengaruhi record di table,
+  wajib dibuatkan audit-nya
+  > format audit ikuti yang sudah ada
+  > untuk kolom-kolom mandatory yang sifatnya unik,
+  sertakan .lstrip.rstrip.upcase / .lstrip.rstrip.downcase
+  ketika proses insert/update record ke table
+
+  dibuat oleh       : Benediktus Aditya,Billy
+  dimantain oleh    : Freddy Yonatan Setiadi
+  di-redesign oleh  : Gregory Jonathan - @gregijc
+-->
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Products</h1>
+
+<br>
+
+<div class="scroll_horizontal">
+  <table class="table_content table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Created by</th>
+          <th>Created at</th>
+          <th>Updated by</th>
+          <th>Updated at</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.category %></td>
+            <td><%= product.release_date %></td>
+            <td><%= product.price %></td>
+            
+            <td>
+              <% if !product.created_by.blank? %>
+                <%#= MsUser.find(ms_master.created_by).name rescue ("<b style='color:red; font-size:16px;'>ERROR</b>".html_safe)%>
+              <% else %>
+                -
+              <% end -%> 
+            </td>
+            <td><%=h product.created_at.strftime('%d %b %Y %H:%M:%S') rescue ("<b style='color:red; font-size:16px;'>ERROR</b>".html_safe)%></td>
+            <td>
+              <% if !product.updated_by.blank? %>
+                <%#= MsUser.find(ms_master.updated_by).name rescue ("<b style='color:red; font-size:16px;'>ERROR</b>".html_safe)%>
+              <% else %>
+                -
+              <% end -%> 
+            </td>
+            <td><%=h product.updated_at.strftime('%d %b %Y %H:%M:%S') rescue ("<b style='color:red; font-size:16px;'>ERROR</b>".html_safe)%></td>
+            
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>
